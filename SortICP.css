@@ -1,0 +1,4 @@
+.cellOrder {
+    cursor:pointer;
+    display: table-cell !important;
+}
