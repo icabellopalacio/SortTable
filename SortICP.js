@@ -1,4 +1,67 @@
 
+function setTableData(){
+    $(getData()).each(functio(item,index){
+        $("<div>").addClass("")
+    })
+    $("tbICP")    
+}
+
+function getData(){
+    let itemData =   [{"Nombre": "Column",
+                        "Edad": 35,
+                        "Altura": 180},
+                      {"Nombre": "Column",
+                        "Edad": 35,
+                        "Altura": 180},
+                      {
+                        "Nombre": "Column",
+                        "Edad": 35,
+                        "Altura": 180
+                        },
+                        {
+                        "Nombre": "Column",
+                        "Edad": 35,
+                        "Altura": 180
+                        },
+                        {
+                        "Nombre": "Column",
+                        "Edad": 35,
+                        "Altura": 180
+                        },
+                        {
+                        "Nombre": "Column",
+                        "Edad": 35,
+                        "Altura": 180
+                        },
+                        {
+                        "Nombre": "Column",
+                        "Edad": 35,
+                        "Altura": 180
+                        },
+                        {
+                        "Nombre": "Column",
+                        "Edad": 35,
+                        "Altura": 180
+                        },
+                        {
+                        "Nombre": "Column",
+                        "Edad": 35,
+                        "Altura": 180
+                        },
+                        {
+                        "Nombre": "Column",
+                        "Edad": 35,
+                        "Altura": 180
+                        },
+                        {
+                        "Nombre": "Column",
+                        "Edad": 35,
+                        "Altura": 180
+                        }
+                    ]
+    return  itemData;           
+    }
+
 /*ICP-->06/05/2019 -- Metodos para ordenar una tabla por cada columna*/
 //Método que ordena el listado
 function OrderTable(OrderItem) {
