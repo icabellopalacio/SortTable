@@ -1,71 +1,57 @@
 
 function setTableData(){
-    $(getData()).each(functio(item,index){
-        $("<div>").addClass("")
-    })
-    $("tbICP")    
+    let itemTr;
+    let itemTbody = $("#tbICP > tbody");
+    $(getData()).each(function(index,item) {
+        itemTr = $("<tr>");
+        $(itemTr).append($("<td>").text(item.Nombre));
+        $(itemTr).append($("<td>").text(item.Edad));
+        $(itemTr).append($("<td>").text(item.Altura));
+        $(itemTbody).append($(itemTr));
+    });
 }
 
 function getData(){
-    let itemData =   [{"Nombre": "Column",
+    let itemData =   [{"Nombre": "Nombre23",
                         "Edad": 35,
                         "Altura": 180},
-                      {"Nombre": "Column",
-                        "Edad": 35,
-                        "Altura": 180},
-                      {
-                        "Nombre": "Column",
-                        "Edad": 35,
-                        "Altura": 180
-                        },
-                        {
-                        "Nombre": "Column",
-                        "Edad": 35,
-                        "Altura": 180
-                        },
-                        {
-                        "Nombre": "Column",
-                        "Edad": 35,
-                        "Altura": 180
-                        },
-                        {
-                        "Nombre": "Column",
-                        "Edad": 35,
-                        "Altura": 180
-                        },
-                        {
-                        "Nombre": "Column",
-                        "Edad": 35,
-                        "Altura": 180
-                        },
-                        {
-                        "Nombre": "Column",
-                        "Edad": 35,
-                        "Altura": 180
-                        },
-                        {
-                        "Nombre": "Column",
-                        "Edad": 35,
-                        "Altura": 180
-                        },
-                        {
-                        "Nombre": "Column",
-                        "Edad": 35,
-                        "Altura": 180
-                        },
-                        {
-                        "Nombre": "Column",
-                        "Edad": 35,
-                        "Altura": 180
-                        }
-                    ]
+                      {"Nombre": "Nombre43",
+                        "Edad": 24,
+                        "Altura": 156},
+                      {"Nombre": "Nombre67",
+                        "Edad": 45,
+                        "Altura": 175},
+                      {"Nombre": "Nombre78",
+                        "Edad": 12,
+                        "Altura": 145},
+                      {"Nombre": "Nombre45",
+                        "Edad": 57,
+                        "Altura": 190},
+                      {"Nombre": "Nombre21",
+                        "Edad": 15,
+                        "Altura": 175},
+                      {"Nombre": "Nombre01",
+                        "Edad": 32,
+                        "Altura": 165},
+                      {"Nombre": "Nombre52",
+                        "Edad": 26,
+                        "Altura": 174},
+                      {"Nombre": "Nombre12",
+                        "Edad": 28,
+                        "Altura": 168},
+                      {"Nombre": "Nombre10",
+                        "Edad": 78,
+                        "Altura": 165},
+                      {"Nombre": "Nombre11",
+                        "Edad": 14,
+                        "Altura": 158}]
     return  itemData;           
     }
 
 /*ICP-->06/05/2019 -- Metodos para ordenar una tabla por cada columna*/
 //Método que ordena el listado
 function OrderTable(OrderItem) {
-    let ItemToOrder = $(OrderItem).context.cellIndex + 1;
+    let ItemToOrder = $(OrderItem)[0].cellIndex + 1;
     let OrderDirection = typeof $(OrderItem).attr("orderdir") !== 'undefined' ? ($(OrderItem).attr("orderdir") === 'true') : false;
     let tableName = $(OrderItem).closest('table').attr('id');
     let orderData = [];
@@ -75,17 +61,17 @@ function OrderTable(OrderItem) {
                                                        ((OrderDirection === true) ? (rowA.toUpperCase() < rowb.toUpperCase()) :
                                                                                     (rowA.toUpperCase() > rowb.toUpperCase())));
     }
-    console.log("Entra");
     $(OrderItem).addClass("fa fa-spinner");
-    orderData = $("#" + tableName + " tr:gt(0)").sort(function (a, b) { 
-        return fnctCompare($("td:nth-child(" + ItemToOrder + ")", a).text(), $("td:nth-child(" + ItemToOrder + ")", b).text()); 
-    }); 
+    orderData = $("#" + tableName + " tr:gt(0)").sort();
+    // orderData = $("#" + tableName + " tr:gt(0)").sort(function (a, b) { 
+    //     return fnctCompare($("td:nth-child(" + ItemToOrder + ")", a).text(), $("td:nth-child(" + ItemToOrder + ")", b).text()); 
+    // }); 
     if (orderData.length > 0){
         $("#" + tableName + " tbody").empty();
         $("#" + tableName + " tbody").append(orderData);
         $(OrderItem).attr("orderdir", (OrderDirection !== true));
-        $("#" + tableName + " thead td").removeClass("fa fa-sort-alpha-asc fa-sort-alpha-desc fa-sort-numeric-asc fa-sort-numeric-desc fa-spinner");
-        $(OrderItem).addClass($(OrderItem).hasClass("orderNumber") ? (OrderDirection === true) ? "fa fa-sort-numeric-desc" :"fa fa-sort-numeric-asc" :
-                                                                     (OrderDirection === true) ? "fa fa-sort-alpha-desc" :"fa fa-sort-alpha-asc");
+        $("#" + tableName + " thead th").removeClass("fa fa-sort-alpha-up fa-sort-alpha-down fa-spinner");
+        $(OrderItem).addClass($(OrderItem).hasClass("orderNumber") ? (OrderDirection === true) ? "fa fa-sort-alpha-up" :"fa fa-sort-alpha-down" :
+                                                                     (OrderDirection === true) ? "fa fa-sort-alpha-up" :"fa fa-sort-alpha-down");
     }
 }

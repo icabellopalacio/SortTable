@@ -6,9 +6,12 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="SortICP.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="SortICP.js"></script>
 </head>
 
 <body>
@@ -21,9 +24,9 @@
 			</button>
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav">
-				<li class="nav-item">
-					<a class="nav-link text-light" href="#">Table Sort</a>
-				</li>    
+					<li class="nav-item">
+						<a class="nav-link text-light" href="#">Table Sort</a>
+					</li>    
 				</ul>
 			</div>  
 		</nav>
@@ -32,10 +35,9 @@
 		<table id ="tbICP" class="table">
 			<thead class="thead-dark">
 				<tr>
-					<th scope="col">#</th>
-					<th scope="col">Nombre</th>
-					<th scope="col">Edad</th>
-					<th scope="col">Altura</th>
+					<th scope="col" class="cellOrder">Nombre</th>
+					<th scope="col" class="cellOrder orderNumber">Edad</th>
+					<th scope="col" class="cellOrder orderNumber">Altura</th>
 				</tr>
 				<tbody></tbody> 
 			</thead>
@@ -45,6 +47,9 @@
 <script>
 	$(document).ready(function () {
 		setTableData();
+		$(".cellOrder").bind("click", function(){
+			OrderTable($(this));
+		});
 	});
 </script>
 </html>
