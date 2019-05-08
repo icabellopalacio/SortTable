@@ -19,8 +19,8 @@ function getData(){
                         "Edad": 24,
                         "Altura": 156},
                       {"Nombre": "Nombre67",
-                        "Edad": 45,
-                        "Altura": 175},
+                        "Edad": 2,
+                        "Altura": 93},
                       {"Nombre": "Nombre78",
                         "Edad": 12,
                         "Altura": 145},
@@ -49,29 +49,26 @@ function getData(){
     }
 
 /*ICP-->06/05/2019 -- Metodos para ordenar una tabla por cada columna*/
-//Método que ordena el listado
 function OrderTable(OrderItem) {
     let ItemToOrder = $(OrderItem)[0].cellIndex + 1;
     let OrderDirection = typeof $(OrderItem).attr("orderdir") !== 'undefined' ? ($(OrderItem).attr("orderdir") === 'true') : false;
     let tableName = $(OrderItem).closest('table').attr('id');
-    let orderData = [];
+    let orderData = []; 
     let fnctCompare = function (rowA, rowb) {
-        return ($(OrderItem).hasClass("orderNumber") ? ((OrderDirection === true) ? (rowA + rowb) :
-                                                                                    (rowA - rowb)) :
-                                                       ((OrderDirection === true) ? (rowA.toUpperCase() < rowb.toUpperCase()) :
-                                                                                    (rowA.toUpperCase() > rowb.toUpperCase())));
+        return ($(OrderItem).hasClass("orderNumber") ? ((OrderDirection === true) ? (parseInt(rowA, 10) > parseInt(rowb, 10)) ? -1:1 :
+                                                                                    (parseInt(rowA, 10) < parseInt(rowb, 10)) ? -1:1 ) :
+                                                       ((OrderDirection === true) ? (rowA.toUpperCase() > rowb.toUpperCase()) ? -1:1 :
+                                                                                    (rowA.toUpperCase() < rowb.toUpperCase()) ? -1:1));
     }
     $(OrderItem).addClass("fa fa-spinner");
-    orderData = $("#" + tableName + " tr:gt(0)").sort();
-    // orderData = $("#" + tableName + " tr:gt(0)").sort(function (a, b) { 
-    //     return fnctCompare($("td:nth-child(" + ItemToOrder + ")", a).text(), $("td:nth-child(" + ItemToOrder + ")", b).text()); 
-    // }); 
+    orderData = [...$("#" + tableName + " tr:gt(0)")].sort(function (a, b) { 
+        return fnctCompare($($("td:nth-child(" + ItemToOrder + ")", a)[0]).text(), $($("td:nth-child(" + ItemToOrder + ")", b)[0]).text()); 
+    }); 
     if (orderData.length > 0){
         $("#" + tableName + " tbody").empty();
         $("#" + tableName + " tbody").append(orderData);
         $(OrderItem).attr("orderdir", (OrderDirection !== true));
         $("#" + tableName + " thead th").removeClass("fa fa-sort-alpha-up fa-sort-alpha-down fa-spinner");
-        $(OrderItem).addClass($(OrderItem).hasClass("orderNumber") ? (OrderDirection === true) ? "fa fa-sort-alpha-up" :"fa fa-sort-alpha-down" :
-                                                                     (OrderDirection === true) ? "fa fa-sort-alpha-up" :"fa fa-sort-alpha-down");
+        $(OrderItem).addClass((OrderDirection === true) ? "fa fa-sort-alpha-up" :"fa fa-sort-alpha-down");
     }
 }
